@@ -1,0 +1,10 @@
+.input-outline:focus {
+    outline: none !important;
+}
+
+input:focus::placeholder {
+    font-size: 0.7em;
+    transform: translateY(-1em);
+    transition: 0.2s ease all;
+
+}
