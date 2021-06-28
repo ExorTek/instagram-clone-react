@@ -1,7 +1,7 @@
 # Instagram Clone(React)
 <img style="margin: 10px" src="https://www.vectorlogo.zone/logos/reactjs/reactjs-ar21.svg" alt="React" height="100" /> 
 
-## Get The Project Up
+## _Get The Project Up_
 
 Instagram Clone requires [Node.js](https://nodejs.org/) v12+ to run.
 
