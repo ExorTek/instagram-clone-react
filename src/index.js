@@ -12,7 +12,8 @@ ReactDOM.render(
     <FirebaseContext.Provider value={{firebase, FieldValue}}>
         <App/>
     </FirebaseContext.Provider>,
-    document.getElementById('root'));
+    document.getElementById('root')
+);
 
 // client side rendered app: react(cra)
 // -> database which is Firebase

@@ -7,26 +7,14 @@ import { toast } from "react-toastify";
 import { doesUsernameExist } from "../services/firebase";
 
 export default function SignUp() {
-  const facebookFire = Firebase;
+
   useEffect(() => {
     document.title = "Sign Up - Instagram";
   }, []);
   const history = useHistory();
   const { firebase } = useContext(FirebaseContext);
-  let provider = new facebookFire.auth.FacebookAuthProvider();
-
-  const handleFacebookLogin = () => {
-    facebookFire
-      .auth()
-      .signInWithPopup(provider)
-      .then((result) => {
-        localStorage.setItem("Profile", JSON.stringify(result.user));
-      })
-      .catch((error) => {
-        setError(error.message);
-        toast.error(setError);
-      });
-  };
+  const facebookFire = Firebase;
+  const provider = new facebookFire.auth.FacebookAuthProvider();
 
   const [username, setUsername] = useState("");
   const [fullName, setFullName] = useState("");
@@ -35,6 +23,19 @@ export default function SignUp() {
 
   const [error, setError] = useState("");
   const isInvalid = password === "" || emailAddress === "";
+
+  const handleFacebookLogin = () => {
+    facebookFire
+        .auth()
+        .signInWithPopup(provider)
+        .then((result) => {
+          localStorage.setItem("Profile", JSON.stringify(result.user));
+        })
+        .catch((error) => {
+          setError(error.message);
+          toast.error(setError);
+        });
+  };
 
   const handleSignUp = async (event) => {
     event.preventDefault();
@@ -73,7 +74,7 @@ export default function SignUp() {
     }
   };
   return (
-    <div className="container flex mx-auto max-w-screen-md items-center h-screen">
+    <div className="container flex mx-auto max-w-screen-md items-center h-screen max-w-screen-md">
       <div className="flex w-3/5">
         <img src="images/login-page.png" alt="iPhone with Instagram app" />
       </div>
@@ -106,34 +107,7 @@ export default function SignUp() {
               Log in with Facebook
             </h1>
           </button>
-          <div
-            style={{
-              margin: "10px 40px 18px",
-              alignItems: "center",
-              flexDirection: "row",
-              display: "flex",
-              justifyContent: "space-between",
-            }}
-            className={"text-gray-head text-sm text-center"}
-          >
-            <hr
-              style={{
-                width: "6em",
-                borderColor: "#dbdbdb",
-                display: "inline-flex",
-                marginRight: "1em",
-              }}
-            />
-            OR
-            <hr
-              style={{
-                width: "6em",
-                borderColor: "#dbdbdb",
-                display: "inline-flex",
-                marginLeft: "1em",
-              }}
-            />
-          </div>
+
           {error && <p className="mb-4 text-xs text-red-primary">{error}</p>}
 
           <form onSubmit={handleSignUp} method="POST">
