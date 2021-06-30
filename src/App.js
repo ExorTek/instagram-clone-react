@@ -27,7 +27,6 @@ function App() {
                 </Suspense>
             </Router>
         </UserContext.Provider>
-
     );
 }
 
