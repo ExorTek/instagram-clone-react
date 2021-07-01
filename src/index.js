@@ -5,7 +5,6 @@ import FirebaseContext from "./context/firebase";
 import { firebase, FieldValue } from "./lib/firebase";
 import "react-toastify/dist/ReactToastify.min.css";
 import "./styles/app.css";
-import "./wdyr";
 
 ReactDOM.render(
   <FirebaseContext.Provider value={{ firebase, FieldValue }}>
