@@ -5,9 +5,9 @@ import usePhotos from "../hooks/use-photos";
 import Post from "./post";
 
 export default function Timeline() {
-  const user = useContext(LoggedInUserContext);
+  const { user } = useContext(LoggedInUserContext);
   const { photos } = usePhotos(user);
-  console.log(user);
+
   return (
     <div className="container col-span-2">
       {!photos ? (
