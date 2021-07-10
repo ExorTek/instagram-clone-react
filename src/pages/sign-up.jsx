@@ -7,7 +7,6 @@ import { toast } from "react-toastify";
 import { doesUsernameExist } from "../services/firebase";
 
 export default function SignUp() {
-
   useEffect(() => {
     document.title = "Sign Up - Instagram";
   }, []);
@@ -26,15 +25,15 @@ export default function SignUp() {
 
   const handleFacebookLogin = () => {
     facebookFire
-        .auth()
-        .signInWithPopup(provider)
-        .then((result) => {
-          localStorage.setItem("Profile", JSON.stringify(result.user));
-        })
-        .catch((error) => {
-          setError(error.message);
-          toast.error(setError);
-        });
+      .auth()
+      .signInWithPopup(provider)
+      .then((result) => {
+        localStorage.setItem("Profile", JSON.stringify(result.user));
+      })
+      .catch((error) => {
+        setError(error.message);
+        toast.error(setError);
+      });
   };
 
   const handleSignUp = async (event) => {
@@ -53,15 +52,18 @@ export default function SignUp() {
           displayName: username,
         });
         // firebase user collection (create a document)
-        await firebase.firestore().collection("users").add({
-          serId: createdUserResult.user.uid,
-          username: username.toLowerCase(),
-          fullName,
-          emailAddress: emailAddress.toLowerCase(),
-          following: ['2'],
-          followers: [],
-          dateCreated: Date.now()
-        });
+        await firebase
+          .firestore()
+          .collection("users")
+          .add({
+            serId: createdUserResult.user.uid,
+            username: username.toLowerCase(),
+            fullName,
+            emailAddress: emailAddress.toLowerCase(),
+            following: ["2"],
+            followers: [],
+            dateCreated: Date.now(),
+          });
         history.push(ROUTES.LOGIN);
       } catch (error) {
         setFullName();
