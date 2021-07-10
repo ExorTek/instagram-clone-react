@@ -12,5 +12,5 @@ npm install or npm i
 npm start
 go to localhost:3000 (default)
 ```
-#project video and resource
+# Project video and resource
 https://www.youtube.com/watch?v=mDgEqoQUBgk
