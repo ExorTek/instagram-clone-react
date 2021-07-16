@@ -5,12 +5,12 @@ import "firebase/auth";
 // import { seedDatabase } from "../seed";
 
 const config = {
-  apiKey: "AIzaSyA_hH4pOOxPNKeMnkhzwmWhZVjWCUxpnpQ",
-  authDomain: "instagram-clone-f3e8e.firebaseapp.com",
-  projectId: "instagram-clone-f3e8e",
-  storageBucket: "instagram-clone-f3e8e.appspot.com",
-  messagingSenderId: "477518434818",
-  appId: "1:477518434818:web:4208fee815a5bb16a78d1b",
+  apiKey: "",
+  authDomain: "",
+  projectId: "",
+  storageBucket: "",
+  messagingSenderId: "",
+  appId: "",
 };
 
 const firebase = Firebase.initializeApp(config);
