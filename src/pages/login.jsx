@@ -42,7 +42,6 @@ export default function Login() {
       setEmailAddress("");
       setPassword("");
       setError(error.message);
-      console.log(error);
     }
   };
   return (
@@ -91,7 +90,7 @@ export default function Login() {
               style={{ backgroundColor: "#0095F6" }}
               disabled={isInvalid}
               type={"submit"}
-              className={`bg-blue-medium text-white w-full rounded h-8 font-bold ${
+              className={`bg-blue-500 text-white w-full rounded h-8 font-bold ${
                 isInvalid && "opacity-50"
               }`}
             >
@@ -99,7 +98,7 @@ export default function Login() {
             </button>
             <button
               onClick={handleFacebookLogin}
-              className={`text-blue-medium w-full rounded h-8 font-bold mb-5 mt-2`}
+              className={`text-blue-500 w-full rounded h-8 font-bold mb-5 mt-2`}
             >
               <h1 className={"flex justify-center w-full"}>
                 <img
@@ -119,7 +118,7 @@ export default function Login() {
         >
           <p className={"text-sm"}>
             Don't have an account?{` `}
-            <Link className={"font-bold text-blue-medium"} to={ROUTES.SIGN_UP}>
+            <Link className={"font-bold text-blue-500"} to={ROUTES.SIGN_UP}>
               Sign Up
             </Link>
           </p>

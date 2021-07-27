@@ -22,7 +22,33 @@ export async function getUserByUsername(username) {
     docId: item.id,
   }));
 }
+export async function getUserFollowersProfile(followers) {
+  const data = [];
 
+  for (let i = 0; i < followers.length; i++) {
+    await firebase
+      .firestore()
+      .collection("users")
+      .where("userId", "==", followers[i])
+      .get()
+      .then((user) => {
+        // console.log(user.docs[0].data());
+        const user2 = user.docs.map((item) => ({
+          ...item.data(),
+          docId: item.id,
+        }));
+        data.push(user2[0]);
+        // data.push(
+        //   user.docs[0].data()
+        //   // user.docs.map((item) => ({
+        //   //   ...item.data(),
+        //   //   docId: item.id,
+        //   // }))
+        // );
+      });
+  }
+  return data;
+}
 // get user from the firestore where userId === userId (passed from the auth)
 export async function getUserByUserId(userId) {
   const result = await firebase
@@ -34,7 +60,6 @@ export async function getUserByUserId(userId) {
     ...item.data(),
     docId: item.id,
   }));
-
   return user;
 }
 
@@ -48,8 +73,6 @@ export async function getSuggestedProfiles(userId, following) {
     query = query.where("userId", "!=", userId);
   }
   const result = await query.limit(10).get();
-  console.log("following", following);
-  console.log("result", result);
   const profiles = result.docs.map((user) => ({
     ...user.data(),
     docId: user.id,
@@ -89,7 +112,17 @@ export async function updateFollowedUserFollowers(
         : FieldValue.arrayUnion(loggedInUserDocId),
     });
 }
-
+// export async function getUserFollowers(docId) {
+//   const result = await firebase
+//     .firestore()
+//     .collection("users")
+//     .doc(docId)
+//     .get()
+//     .then((user) => {
+//       return user.data().followers;
+//     });
+//   // console.log(result.userId);
+// }
 export async function getPhotos(userId, following) {
   const result = await firebase
     .firestore()

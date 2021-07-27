@@ -6,7 +6,9 @@
 *::after {
     box-sizing: border-box;
 }
-
+.profile-follow-follower:hover{
+    color:#0095f6;
+}
 :root {
     -moz-tab-size: 4;
     tab-size: 4;
@@ -141,10 +143,7 @@ button {
 }
 
 
-button:focus {
-    outline: 1px dotted;
-    outline: 5px auto -webkit-focus-ring-color;
-}
+
 
 fieldset {
     margin: 0;
@@ -516,8 +515,8 @@ video {
 }
 
 .py-0 {
-    padding-top: 0px;
-    padding-bottom: 0px;
+    padding-top: 0;
+    padding-bottom: 0;
 }
 
 .px-4 {
@@ -536,11 +535,11 @@ video {
 }
 
 .pb-0 {
-    padding-bottom: 0px;
+    padding-bottom: 0;
 }
 
 .pl-0 {
-    padding-left: 0px;
+    padding-left: 0;
 }
 
 .pt-1 {
@@ -572,11 +571,11 @@ video {
 }
 
 .bottom-0 {
-    bottom: 0px;
+    bottom: 0;
 }
 
 .left-0 {
-    left: 0px;
+    left: 0;
 }
 
 * {
@@ -584,10 +583,8 @@ video {
 }
 
 * {
-    --tw-ring-inset: var(--tw-empty, /*!*/ /*!*/);
     --tw-ring-offset-width: 0px;
     --tw-ring-offset-color: #fff;
-    --tw-ring-color: rgba(59, 130, 246, 0.5);
     --tw-ring-offset-shadow: 0 0 #0000;
     --tw-ring-shadow: 0 0 #0000;
 }

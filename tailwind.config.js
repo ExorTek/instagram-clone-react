@@ -11,6 +11,7 @@ module.exports = {
       white: "#ffffff",
       blue: {
         medium: "#0095f6",
+        500: "#0095f6",
       },
       black: {
         light: "#262626",
@@ -21,6 +22,8 @@ module.exports = {
         background: "#fafafa",
         primary: "#dbdbdb",
         head: "#8e8e8e",
+        modal: "#111827",
+        profile: "#8e8e8e",
       },
       red: {
         primary: "#ed4956",

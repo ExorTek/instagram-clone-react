@@ -1,13 +1,20 @@
-import { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import PropTypes from "prop-types";
 import Skeleton from "react-loading-skeleton";
 import useUser from "../../hooks/use-user";
-import { isUserFollowingProfile, toggleFollow } from "../../services/firebase";
+import {
+  getUserFollowersProfile,
+  isUserFollowingProfile,
+  toggleFollow,
+} from "../../services/firebase";
 import UserContext from "../../context/user";
 import { DEFAULT_IMAGE_PATH } from "../../constants/path";
+import { Link } from "react-router-dom";
+import PopupFollowers from "./popup-followers";
 
 export default function Header({
   photosCount,
+  setScroll,
   followerCount,
   setFollowerCount,
   profile: {
@@ -23,6 +30,23 @@ export default function Header({
   const { user } = useUser(loggedInUser?.uid);
   const [isFollowingProfile, setIsFollowingProfile] = useState(null);
   const activeBtnFollow = user?.username && user?.username !== profileUsername;
+  const [showModal, setShowModal] = React.useState(false);
+  const [followersWithProfile, setFollowersWithProfile] = useState({});
+
+  useEffect(() => {
+    if (user?.followers) {
+      getUserFollowersProfile(user?.followers).then((data) =>
+        setFollowersWithProfile(data)
+      );
+    }
+  }, [user?.followers]);
+  useEffect(() => {
+    if (showModal) {
+      setScroll(true);
+    } else {
+      setScroll(false);
+    }
+  }, [showModal]);
 
   const handleToggleFollow = async () => {
     setIsFollowingProfile((isFollowingProfile) => !isFollowingProfile);
@@ -76,7 +100,7 @@ export default function Header({
           ) : (
             activeBtnFollow && (
               <button
-                className="bg-blue-medium font-bold text-sm rounded text-white w-20 h-8"
+                className="bg-blue-500 font-bold text-sm rounded text-white w-20 h-8"
                 type="button"
                 onClick={handleToggleFollow}
                 onKeyDown={(event) => {
@@ -98,14 +122,28 @@ export default function Header({
               <p className="mr-10">
                 <span className="font-bold">{photosCount}</span> photos
               </p>
-              <p className="mr-10">
-                <span className="font-bold">{followerCount}</span>
-                {` `}
-                {followerCount === 1 ? `follower` : `followers`}
-              </p>
-              <p className="mr-10">
-                <span className="font-bold">{following?.length}</span> following
-              </p>
+              <Link onClick={() => setShowModal(true)}>
+                <p className="mr-10 profile-follow-follower">
+                  <span className="font-bold">{followerCount}</span>
+                  {` `}
+                  {followerCount === 1 ? `follower` : `followers`}
+                </p>
+              </Link>
+              {showModal && (
+                <PopupFollowers
+                  className={"fixed"}
+                  showModal={showModal}
+                  followers={followersWithProfile}
+                  following={isFollowingProfile}
+                  setShowModal={setShowModal}
+                />
+              )}
+              <Link>
+                <p className="mr-10 profile-follow-follower">
+                  <span className="font-bold">{following?.length}</span>{" "}
+                  following
+                </p>
+              </Link>
             </>
           )}
         </div>

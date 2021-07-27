@@ -1,4 +1,4 @@
-import { useReducer, useEffect } from "react";
+import { useReducer, useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import Header from "./header";
 import Photos from "./photos";
@@ -11,7 +11,10 @@ export default function Profile({ user }) {
     photosCollection: null,
     followerCount: 0,
   };
-
+  const [isScroll, setIsScroll] = useState(false);
+  const setScroll = (value) => {
+    setIsScroll(value);
+  };
   const [{ profile, photosCollection, followerCount }, dispatch] = useReducer(
     reducer,
     initialState
@@ -28,17 +31,18 @@ export default function Profile({ user }) {
     }
     getProfileInfoAndPhotos();
   }, [user.username]);
-
+  console.log(isScroll);
   return (
-    <>
+    <div style={{ height: isScroll && "85vh" }} className={" overflow-hidden"}>
       <Header
         photosCount={photosCollection ? photosCollection.length : 0}
         profile={profile}
         followerCount={followerCount}
         setFollowerCount={dispatch}
+        setScroll={setScroll}
       />
       <Photos photos={photosCollection} />
-    </>
+    </div>
   );
 }
 
