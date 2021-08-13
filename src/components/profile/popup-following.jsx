@@ -18,7 +18,7 @@ export default function PopupFollowing({ showModal, setShowModal, following }) {
                 <h3 className="mx-auto py-2 w-full text-center  text-1xl font-medium">
                   Following
                 </h3>
-                <button onClick={() => setShowModal(false)} className={"py-1"}>
+                <button  onClick={() => setShowModal(false)} className={"py-1"}>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="h-8 w-16 "
